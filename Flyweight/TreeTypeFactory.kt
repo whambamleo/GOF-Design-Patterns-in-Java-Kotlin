@@ -7,12 +7,7 @@ class TreeTypeFactory {
         private val treeTypes: HashMap<String, TreeType> = hashMapOf()
 
         fun getTreeType(name: String, color: Color): TreeType {
-            var result = treeTypes[name]
-            if (result == null) {
-                result = TreeType(name, color)
-                treeTypes[name] = result
-            }
-            return result;
+            return treeTypes.getOrPut(name) { TreeType(name, color) }
         }
 
         fun getTreeTypeNoCaching(name: String, color: Color): TreeType {

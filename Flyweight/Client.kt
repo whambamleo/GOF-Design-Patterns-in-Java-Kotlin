@@ -8,7 +8,7 @@ fun random(min: Int, max: Int): Int {
 
 fun main() {
     val canvasSize = 1000
-    val numTreesToDraw = 100000
+    val numTreesToDraw = 5000
     val numTreeTypes = 4
 
     val forest = Forest();

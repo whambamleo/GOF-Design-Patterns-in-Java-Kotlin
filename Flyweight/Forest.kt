@@ -11,8 +11,7 @@ class Forest(): JFrame() {
     fun plantTree(x: Int, y: Int, name: String, color: Color) {
         val treeType = TreeTypeFactory.getTreeType(name, color)
 //        val treeType = TreeTypeFactory.getTreeTypeNoCaching(name, color)
-        val tree =  Tree(x, y, treeType)
-        trees.add(tree)
+        trees.add(Tree(x, y, treeType))
     }
 
     override fun paint(g: Graphics) {
