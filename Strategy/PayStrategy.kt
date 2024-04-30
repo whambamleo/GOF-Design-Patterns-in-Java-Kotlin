@@ -1,6 +1,5 @@
 package Strategy
 
 interface PayStrategy {
-    fun pay(amount: Int): Boolean;
-    fun collectPaymentDetails();
+    fun pay(amount: Int): Boolean
 }

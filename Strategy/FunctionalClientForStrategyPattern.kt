@@ -3,11 +3,35 @@ package Strategy
 import java.io.BufferedReader
 import java.io.InputStreamReader
 
+typealias Strategy = (Int) -> Boolean
+
+val payPalPayStrategy: Strategy = { amount ->
+    println("Logged in to PayPal!")
+    println("Paying $amount using PayPal.")
+    val paymentStatus = true
+    paymentStatus
+}
+
+val ccPayStrategy: Strategy = { amount ->
+    println("Logged in to bank account!")
+    println("Paying $amount using credit card.")
+    val paymentStatus = true
+    paymentStatus
+}
+
+fun pay(strategy: Strategy, amount: Int): Boolean {
+    return strategy(amount)
+}
+
+fun Order.processOrderUsingAnonymousFunction(strategy: Strategy, amount: Int) {
+    pay(strategy, amount)
+}
+
 fun main() {
     val productPrices = mapOf(1 to 100, 2 to 50, 3 to 75, 4 to 25)
     val order = Order()
     val br = BufferedReader(InputStreamReader(System.`in`))
-    var strategy: PayStrategy
+    var strategy: Strategy
 
     while(!order.isClosed()) {
         var continueChoice: String
@@ -40,18 +64,13 @@ fun main() {
 
         val paymentMethod = br.readLine()
         strategy = when(paymentMethod) {
-            "1" -> { PayPalPayStrategy() }
-            "2" -> { CCPayStrategy() }
-            else -> { CCPayStrategy() } // default is credit card
+            "1" -> { payPalPayStrategy }
+            "2" -> { ccPayStrategy }
+            else -> { ccPayStrategy } // default is credit card
         }
 
-        order.processOrder(strategy, order.getTotalCost())
+        order.processOrderUsingAnonymousFunction(strategy, order.getTotalCost())
         println("Payment has been successful.")
-
         order.close()
     }
-
 }
-
-
-

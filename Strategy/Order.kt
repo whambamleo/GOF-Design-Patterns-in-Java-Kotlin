@@ -4,8 +4,8 @@ class Order(
     private var totalCost: Int = 0,
     private var isClosed: Boolean = false) {
 
-    fun processOrder(strategy: PayStrategy) {
-        strategy.collectPaymentDetails()
+    fun processOrder(strategy: PayStrategy, amount: Int) {
+        strategy.pay(amount)
     }
 
     fun incrementTotalCost(amount: Int) {
